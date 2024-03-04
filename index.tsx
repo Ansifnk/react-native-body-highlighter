@@ -1,45 +1,55 @@
-import React, { memo, useCallback } from "react";
-import { Path } from "react-native-svg";
-import differenceWith from "ramda/src/differenceWith";
+import React, {memo, useCallback} from 'react';
+import {Path, G, Circle} from 'react-native-svg';
+import differenceWith from 'ramda/src/differenceWith';
 
-import { bodyFront } from "./assets/bodyFront";
-import { bodyBack } from "./assets/bodyBack";
-import { SvgMaleWrapper } from "./components/SvgMaleWrapper";
-import { bodyFemaleFront } from "./assets/bodyFemaleFront";
-import { bodyFemaleBack } from "./assets/bodyFemaleBack";
-import { SvgFemaleWrapper } from "./components/SvgFemaleWrapper";
+import {bodyFront} from './assets/bodyFront';
+import {bodyBack} from './assets/bodyBack';
+import {SvgMaleWrapper} from './components/SvgMaleWrapper';
+import {bodyFemaleFront} from './assets/bodyFemaleFront';
+import {bodyFemaleBack} from './assets/bodyFemaleBack';
+import {SvgFemaleWrapper} from './components/SvgFemaleWrapper';
+import PathWithCenter from 'react-native-body-highlighter/components/PathWithCenter';
 
 export type Slug =
-  | "abs"
-  | "adductors"
-  | "ankles"
-  | "biceps"
-  | "calves"
-  | "chest"
-  | "deltoids"
-  | "deltoids"
-  | "feet"
-  | "forearm"
-  | "gluteal"
-  | "hamstring"
-  | "hands"
-  | "hair"
-  | "head"
-  | "knees"
-  | "lower-back"
-  | "neck"
-  | "obliques"
-  | "quadriceps"
-  | "tibialis"
-  | "trapezius"
-  | "triceps"
-  | "upper-back";
+  | 'abs'
+  | 'adductors'
+  | 'ankles'
+  | 'biceps'
+  | 'calves'
+  | 'chest'
+  | 'deltoids'
+  | 'deltoids'
+  | 'feet'
+  | 'forearm'
+  | 'gluteal'
+  | 'hamstring'
+  | 'hands'
+  | 'hair'
+  | 'head'
+  | 'knees'
+  | 'lower-back'
+  | 'neck'
+  | 'obliques'
+  | 'quadriceps'
+  | 'tibialis'
+  | 'trapezius'
+  | 'triceps'
+  | 'upper-back'
+  | 'knee'
+  | 'elbow'
+  | 'hip'
+  | 'clavicle'
+  | 'wrist'
+  | 'angle';
 
 export interface BodyPart {
   intensity?: number;
   color: string;
   slug: Slug;
   pathArray?: string[];
+  type?: string;
+  cx?: string;
+  cy?: string;
 }
 
 type Props = {
@@ -48,9 +58,10 @@ type Props = {
   scale: number;
   frontOnly: boolean;
   backOnly: boolean;
-  side: "front" | "back";
-  gender?: "male" | "female";
+  side: 'front' | 'back';
+  gender?: 'male' | 'female';
   onBodyPartPress: (b: BodyPart) => void;
+  renderCircles: any;
 };
 
 const comparison = (a: BodyPart, b: BodyPart) => a.slug === b.slug;
@@ -60,29 +71,30 @@ const Body = ({
   data,
   scale,
   side,
-  gender = "male",
+  gender = 'male',
   onBodyPartPress,
+  renderCircles,
 }: Props) => {
   const mergedBodyParts = useCallback(
     (dataSource: ReadonlyArray<BodyPart>) => {
       const innerData = data
-        .map((d) => {
-          return dataSource.find((t) => t.slug === d.slug);
+        .map(d => {
+          return dataSource.find(t => t.slug === d.slug);
         })
         .filter(Boolean);
 
-      const coloredBodyParts = innerData.map((d) => {
-        const bodyPart = data.find((e) => e.slug === d?.slug);
+      const coloredBodyParts = innerData.map(d => {
+        const bodyPart = data.find(e => e.slug === d?.slug);
         let colorIntensity = 1;
         if (bodyPart?.intensity) colorIntensity = bodyPart.intensity;
-        return { ...d, color: colors[colorIntensity - 1] };
+        return {...d, color: colors[colorIntensity - 1]};
       });
 
       const formattedBodyParts = differenceWith(comparison, dataSource, data);
 
       return [...formattedBodyParts, ...coloredBodyParts];
     },
-    [data, colors]
+    [data, colors],
   );
 
   const getColorToFill = (bodyPart: BodyPart) => {
@@ -93,7 +105,7 @@ const Body = ({
   };
 
   const renderBodySvg = (data: ReadonlyArray<BodyPart>) => {
-    const SvgWrapper = gender === "male" ? SvgMaleWrapper : SvgFemaleWrapper;
+    const SvgWrapper = gender === 'male' ? SvgMaleWrapper : SvgFemaleWrapper;
     return (
       <SvgWrapper side={side} scale={scale}>
         {mergedBodyParts(data).map((bodyPart: BodyPart) => {
@@ -109,24 +121,35 @@ const Body = ({
                 />
               );
             });
+           
+          } else if (bodyPart.type == 'circle') {
+            return (
+              <Circle
+                fill={getColorToFill(bodyPart)}
+                onPress={() => onBodyPartPress?.(bodyPart)}
+                cx={bodyPart.cx}
+                cy={bodyPart.cy}
+                r="20"
+              />
+            );
           }
         })}
       </SvgWrapper>
     );
   };
 
-  if (gender === "female") {
-    return renderBodySvg(side === "front" ? bodyFemaleFront : bodyFemaleBack);
+  if (gender === 'female') {
+    return renderBodySvg(side === 'front' ? bodyFemaleFront : bodyFemaleBack);
   }
 
-  return renderBodySvg(side === "front" ? bodyFront : bodyBack);
+  return renderBodySvg(side === 'front' ? bodyFront : bodyBack);
 };
 
 Body.defaultProps = {
   scale: 1,
-  colors: ["#0984e3", "#74b9ff"],
+  colors: ['#0984e3', '#74b9ff'],
   zoomOnPress: false,
-  side: "front",
+  side: 'front',
 };
 
 export default memo(Body);
