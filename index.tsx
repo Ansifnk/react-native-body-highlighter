@@ -1,5 +1,5 @@
 import React, {memo, useCallback} from 'react';
-import {Path, G, Circle} from 'react-native-svg';
+import {Path, Circle} from 'react-native-svg';
 import differenceWith from 'ramda/src/differenceWith';
 
 import {bodyFront} from './assets/bodyFront';
@@ -8,7 +8,6 @@ import {SvgMaleWrapper} from './components/SvgMaleWrapper';
 import {bodyFemaleFront} from './assets/bodyFemaleFront';
 import {bodyFemaleBack} from './assets/bodyFemaleBack';
 import {SvgFemaleWrapper} from './components/SvgFemaleWrapper';
-import PathWithCenter from 'react-native-body-highlighter/components/PathWithCenter';
 
 export type Slug =
   | 'abs'
