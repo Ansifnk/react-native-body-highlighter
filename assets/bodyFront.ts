@@ -252,13 +252,13 @@ export const bodyFront: BodyPart[] = [
     cx: '190',
     cy: '510'
   },
-  {
-    slug: 'clavicle',
-    color: "red",
-    type: 'circle',
-    cx: '290',
-    cy: '310'
-  },
+  // {
+  //   slug: 'clavicle',
+  //   color: "red",
+  //   type: 'circle',
+  //   cx: '290',
+  //   cy: '310'
+  // },
   {
     slug: 'hip',
     color: "red",
@@ -273,4 +273,13 @@ export const bodyFront: BodyPart[] = [
     cx: '290',
     cy: '975'
   },
+  {
+    slug: 'clavicle',
+    color: 'red',
+    type: 'line',
+    x1: "280", 
+    y1: "315", 
+    x2: "450", 
+    y2: "315"
+  }
 ];
