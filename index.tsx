@@ -1,13 +1,13 @@
-import React, {memo, useCallback} from 'react';
-import {Path, Circle} from 'react-native-svg';
+import React, { memo, useCallback } from 'react';
+import { Path, Circle, Line } from 'react-native-svg';
 import differenceWith from 'ramda/src/differenceWith';
 
-import {bodyFront} from './assets/bodyFront';
-import {bodyBack} from './assets/bodyBack';
-import {SvgMaleWrapper} from './components/SvgMaleWrapper';
-import {bodyFemaleFront} from './assets/bodyFemaleFront';
-import {bodyFemaleBack} from './assets/bodyFemaleBack';
-import {SvgFemaleWrapper} from './components/SvgFemaleWrapper';
+import { bodyFront } from './assets/bodyFront';
+import { bodyBack } from './assets/bodyBack';
+import { SvgMaleWrapper } from './components/SvgMaleWrapper';
+import { bodyFemaleFront } from './assets/bodyFemaleFront';
+import { bodyFemaleBack } from './assets/bodyFemaleBack';
+import { SvgFemaleWrapper } from './components/SvgFemaleWrapper';
 
 export type Slug =
   | 'abs'
@@ -39,7 +39,8 @@ export type Slug =
   | 'hip'
   | 'clavicle'
   | 'wrist'
-  | 'angle';
+  | 'angle'
+  | 'axial';
 
 export interface BodyPart {
   intensity?: number;
@@ -49,6 +50,10 @@ export interface BodyPart {
   type?: string;
   cx?: string;
   cy?: string;
+  x1?: string;
+  y1?: string;
+  x2?: string;
+  y2?: string;
 }
 
 type Props = {
@@ -86,7 +91,7 @@ const Body = ({
         const bodyPart = data.find(e => e.slug === d?.slug);
         let colorIntensity = 1;
         if (bodyPart?.intensity) colorIntensity = bodyPart.intensity;
-        return {...d, color: colors[colorIntensity - 1]};
+        return { ...d, color: colors[colorIntensity - 1] };
       });
 
       const formattedBodyParts = differenceWith(comparison, dataSource, data);
@@ -120,8 +125,9 @@ const Body = ({
                 />
               );
             });
-           
+
           } else if (bodyPart.type == 'circle') {
+            console.log(bodyPart, 'bp')
             return (
               <Circle
                 fill={getColorToFill(bodyPart)}
@@ -129,6 +135,19 @@ const Body = ({
                 cx={bodyPart.cx}
                 cy={bodyPart.cy}
                 r="20"
+              />
+            );
+          } else if (bodyPart.type == 'line') {
+            console.log(bodyPart, 'line')
+            return (
+              <Line
+                stroke={getColorToFill(bodyPart)}
+                onPress={() => onBodyPartPress?.(bodyPart)}
+                x1={bodyPart.x1}
+                y1={bodyPart.y1}
+                x2={bodyPart.x2}
+                y2={bodyPart.y2}
+                strokeWidth={'20'}
               />
             );
           }
