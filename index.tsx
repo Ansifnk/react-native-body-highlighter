@@ -140,15 +140,20 @@ const Body = ({
           } else if (bodyPart.type == 'line') {
             console.log(bodyPart, 'line')
             return (
-              <Line
-                stroke={getColorToFill(bodyPart)}
-                onPress={() => onBodyPartPress?.(bodyPart)}
-                x1={bodyPart.x1}
-                y1={bodyPart.y1}
-                x2={bodyPart.x2}
-                y2={bodyPart.y2}
-                strokeWidth={'20'}
-              />
+              <>
+                <Line
+                  stroke={getColorToFill(bodyPart)}
+                  onPress={() => onBodyPartPress?.(bodyPart)}
+                  x1={bodyPart.x1}
+                  y1={bodyPart.y1}
+                  x2={bodyPart.x2}
+                  y2={bodyPart.y2}
+
+                  strokeWidth={'20'}
+                />
+                <Circle cx={bodyPart.x1} cy={bodyPart.y1} r={10} fill={getColorToFill(bodyPart)} />
+                <Circle cx={bodyPart.x2} cy={bodyPart.y2} r={10} fill={getColorToFill(bodyPart)} />
+              </>
             );
           }
         })}
