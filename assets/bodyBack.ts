@@ -213,7 +213,7 @@ export const bodyBack: BodyPart[] = [
     color: "red",
     type: 'line',
     x1: "1085", 
-    y1: "300", 
+    y1: "245", 
     x2: "1085", 
     y2: "650"
   },
