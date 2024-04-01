@@ -281,5 +281,12 @@ export const bodyFront: BodyPart[] = [
     y1: "315", 
     x2: "450", 
     y2: "315"
-  }
+  },
+  {
+    slug: 'ankles_joint',
+    color: "red",
+    type: 'circle',
+    cx: '290',
+    cy: '1250'
+  },
 ];
