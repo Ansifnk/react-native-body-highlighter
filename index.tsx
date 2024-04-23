@@ -8,7 +8,8 @@ import { SvgMaleWrapper } from './components/SvgMaleWrapper';
 import { bodyFemaleFront } from './assets/bodyFemaleFront';
 import { bodyFemaleBack } from './assets/bodyFemaleBack';
 import { SvgFemaleWrapper } from './components/SvgFemaleWrapper';
-
+import { getSVGPathCenter } from 'react-native-body-highlighter/getPathCenter';
+import { Dimensions } from 'react-native'
 export type Slug =
   | 'abs'
   | 'adductors'
@@ -114,11 +115,14 @@ const Body = ({
       <SvgWrapper side={side} scale={scale}>
         {mergedBodyParts(data).map((bodyPart: BodyPart) => {
           if (bodyPart.pathArray) {
-            return bodyPart.pathArray.map((path: string) => {
+            return bodyPart.pathArray.map((path: string, id: number) => {
+
+              console.log(getSVGPathCenter(path))
+
               return (
                 <Path
                   key={path}
-                  onPress={() => onBodyPartPress?.(bodyPart)}
+                  onPress={() => getSVGPathCenter(path).x > Dimensions.get('screen').width / 2 && onBodyPartPress?.(bodyPart)}
                   id={bodyPart.slug}
                   fill={getColorToFill(bodyPart)}
                   d={path}
