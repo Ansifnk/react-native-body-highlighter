@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { Path, Circle, Line } from 'react-native-svg';
+import { Path, Circle, Line, Rect } from 'react-native-svg';
 import differenceWith from 'ramda/src/differenceWith';
 
 import { bodyFront } from './assets/bodyFront';
@@ -8,8 +8,7 @@ import { SvgMaleWrapper } from './components/SvgMaleWrapper';
 import { bodyFemaleFront } from './assets/bodyFemaleFront';
 import { bodyFemaleBack } from './assets/bodyFemaleBack';
 import { SvgFemaleWrapper } from './components/SvgFemaleWrapper';
-import { getSVGPathCenter } from 'react-native-body-highlighter/getPathCenter';
-import { Dimensions } from 'react-native'
+
 export type Slug =
   | 'abs'
   | 'adductors'
@@ -55,6 +54,8 @@ export interface BodyPart {
   y1?: string;
   x2?: string;
   y2?: string;
+  width?: string;
+  height?: string;
 }
 
 type Props = {
@@ -115,14 +116,11 @@ const Body = ({
       <SvgWrapper side={side} scale={scale}>
         {mergedBodyParts(data).map((bodyPart: BodyPart) => {
           if (bodyPart.pathArray) {
-            return bodyPart.pathArray.map((path: string, id: number) => {
-
-              console.log(getSVGPathCenter(path))
-
+            return bodyPart.pathArray.map((path: string) => {
               return (
                 <Path
                   key={path}
-                  onPress={() => getSVGPathCenter(path).x > Dimensions.get('screen').width / 2 && onBodyPartPress?.(bodyPart)}
+                  onPress={() => onBodyPartPress?.(bodyPart)}
                   id={bodyPart.slug}
                   fill={getColorToFill(bodyPart)}
                   d={path}
@@ -157,6 +155,24 @@ const Body = ({
                 />
                 <Circle cx={bodyPart.x1} cy={bodyPart.y1} r={10} fill={getColorToFill(bodyPart)} />
                 <Circle cx={bodyPart.x2} cy={bodyPart.y2} r={10} fill={getColorToFill(bodyPart)} />
+              </>
+            );
+          } else if (bodyPart.type == 'rect') {
+            console.log(bodyPart, 'line')
+            return (
+              <>
+                <Rect
+                  stroke={getColorToFill(bodyPart)}
+                  onPress={() => onBodyPartPress?.(bodyPart)}
+                  x={bodyPart.cx}
+                  y={bodyPart.cy}
+                  width={bodyPart.width}
+                  height={bodyPart.height}
+                  fill={getColorToFill(bodyPart)}
+                  fillOpacity={0.5}
+                  strokeWidth={'10'}
+                />
+
               </>
             );
           }
