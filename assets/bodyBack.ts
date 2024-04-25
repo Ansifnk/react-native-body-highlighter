@@ -211,11 +211,15 @@ export const bodyBack: BodyPart[] = [
   {
     slug: 'axial',
     color: "red",
-    type: 'line',
-    x1: "1085", 
-    y1: "245", 
-    x2: "1085", 
-    y2: "650"
+    type: 'rect',
+    cx: '985',
+    cy: '485',
+    width:'200',
+    height:'150'
+    // x1: "1085", 
+    // y1: "245", 
+    // x2: "1085", 
+    // y2: "650"
   },
   {
     slug: 'ankles_joint',
