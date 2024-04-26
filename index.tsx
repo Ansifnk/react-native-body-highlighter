@@ -68,6 +68,7 @@ type Props = {
   gender?: 'male' | 'female';
   onBodyPartPress: (b: BodyPart) => void;
   renderCircles: any;
+  showJoints: boolean;
 };
 
 const comparison = (a: BodyPart, b: BodyPart) => a.slug === b.slug;
@@ -80,6 +81,7 @@ const Body = ({
   gender = 'male',
   onBodyPartPress,
   renderCircles,
+  showJoints = false
 }: Props) => {
   const mergedBodyParts = useCallback(
     (dataSource: ReadonlyArray<BodyPart>) => {
@@ -120,7 +122,7 @@ const Body = ({
               return (
                 <Path
                   key={path}
-                  onPress={() => onBodyPartPress?.(bodyPart)}
+                  onPress={() => { onBodyPartPress?.(bodyPart)  }}
                   id={bodyPart.slug}
                   fill={getColorToFill(bodyPart)}
                   d={path}
@@ -128,7 +130,7 @@ const Body = ({
               );
             });
 
-          } else if (bodyPart.type == 'circle') {
+          } else if (showJoints && bodyPart.type == 'circle') {
             console.log(bodyPart, 'bp')
             return (
               <Circle
@@ -139,7 +141,7 @@ const Body = ({
                 r="20"
               />
             );
-          } else if (bodyPart.type == 'line') {
+          } else if (showJoints && bodyPart.type == 'line') {
             console.log(bodyPart, 'line')
             return (
               <>
@@ -157,7 +159,7 @@ const Body = ({
                 <Circle cx={bodyPart.x2} cy={bodyPart.y2} r={10} fill={getColorToFill(bodyPart)} />
               </>
             );
-          } else if (bodyPart.type == 'rect') {
+          } else if (showJoints && bodyPart.type == 'rect') {
             console.log(bodyPart, 'line')
             return (
               <>
