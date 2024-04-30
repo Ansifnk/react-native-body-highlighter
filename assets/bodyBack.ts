@@ -90,6 +90,7 @@ export const bodyBack: BodyPart[] = [
   // Gluteal
   {
     slug: "gluteal",
+    optionId:'buttock_head',
     color: "#3f3f3f",
     pathArray: [
       "M1045.06 626.19q1.42.61 4.11 4.4.27.39-.19.52c-14.47 4.12-26.13 7.4-38.13 15.77q-15.37 10.71-30.53 21.6a.55.54 74.9 01-.86-.5c1.19-13.13 10.35-35.23 20.46-45.06 9.14-8.88 34.99-1.11 45.14 3.27z",
@@ -209,11 +210,40 @@ export const bodyBack: BodyPart[] = [
     cy: '550'
   },
   {
+    slug: 'axial_1',
+    optionId:'cervical_lHand',
+    color: "red",
+    type: 'rect',
+    cx: '1035',
+    cy: '240',
+    width:'100',
+    height:'47'
+    // x1: "1085", 
+    // y1: "245", 
+    // x2: "1085", 
+    // y2: "650"
+  },
+  {
+    slug: 'axial_2',
+    optionId:'thoracic_lHand',
+    color: "red",
+    type: 'rect',
+    cx: '985',
+    cy: '300',
+    width:'200',
+    height:'205'
+    // x1: "1085", 
+    // y1: "245", 
+    // x2: "1085", 
+    // y2: "650"
+  },
+  {
+    optionId:'lumbar_lHand',
     slug: 'axial',
     color: "red",
     type: 'rect',
     cx: '985',
-    cy: '485',
+    cy: '520',
     width:'200',
     height:'150'
     // x1: "1085", 
