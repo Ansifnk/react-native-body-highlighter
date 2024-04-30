@@ -40,7 +40,8 @@ export type Slug =
   | 'clavicle'
   | 'wrist'
   | 'angle'
-  | 'axial';
+  | 'axial'
+  |'ankles_joint'
 
 export interface BodyPart {
   intensity?: number;
@@ -56,6 +57,7 @@ export interface BodyPart {
   y2?: string;
   width?: string;
   height?: string;
+  optionId?:string;
 }
 
 type Props = {
