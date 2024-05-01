@@ -258,4 +258,36 @@ export const bodyBack: BodyPart[] = [
     cx: '1005',
     cy: '1300'
   },
+  {
+    slug: 'wrist',
+    color: "red",
+    type: 'circle',
+    cx: '855',
+    cy: '690'
+  },
+  {
+    slug: 'shoulder',
+    color: "red",
+    type: 'circle',
+    cx: '935',
+    cy: '350'
+  },
+  
+  
+  // {
+  //   slug: 'hip',
+  //   color: "red",
+  //   type: 'circle',
+  //   cx: '275',
+  //   cy: '650'
+  // },
+  // {
+  //   slug: 'knee',
+  //   color: "red",
+  //   type: 'circle',
+  //   cx: '290',
+  //   cy: '975'
+  // },
+  
+  
 ];
