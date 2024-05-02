@@ -272,7 +272,12 @@ export const bodyBack: BodyPart[] = [
     cx: '935',
     cy: '350'
   },
-  
+      {slug: 'knee',
+    color: "red",
+    type: 'circle',
+    cx: '1005',
+    cy: '985'
+  },
   
   // {
   //   slug: 'hip',
@@ -282,12 +287,7 @@ export const bodyBack: BodyPart[] = [
   //   cy: '650'
   // },
   // {
-  //   slug: 'knee',
-  //   color: "red",
-  //   type: 'circle',
-  //   cx: '290',
-  //   cy: '975'
-  // },
+
   
   
 ];
