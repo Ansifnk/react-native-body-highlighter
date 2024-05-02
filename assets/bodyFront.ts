@@ -248,6 +248,13 @@ export const bodyFront: BodyPart[] = [
     cy: '683.05'
   },
   {
+    slug: 'shoulder',
+    color: "red",
+    type: 'circle',
+    cx: '225',
+    cy: '340'
+  },
+  {
     slug: 'elbow',
     color: "red",
     type: 'circle',
