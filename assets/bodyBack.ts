@@ -102,7 +102,7 @@ export const bodyBack: BodyPart[] = [
 
   // Adductors
   {
-    slug: "adductors",
+    slug: "adductors2",
     color: "#3f3f3f",
     pathArray: [
       "M1070.06 785.19c2.95 1.36 1.8 10.43 1.49 13.04q-3.98 33.27-14.66 64.61a.39.39 0 01-.76-.17c.9-7.05 2.31-14.29 2.16-20.92q-.68-30.14-18.71-54.52-.29-.39.18-.49c7.42-1.52 23.53-4.69 30.3-1.55z",
@@ -246,6 +246,20 @@ export const bodyBack: BodyPart[] = [
     cy: '520',
     width:'200',
     height:'150'
+    // x1: "1085", 
+    // y1: "245", 
+    // x2: "1085", 
+    // y2: "650"
+  },
+  {
+    optionId:'SIJ_lHand',
+    slug: 'sij',
+    color: "red",
+    type: 'rect',
+    cx: '1035',
+    cy: '685',
+    width:'100',
+    height:'40'
     // x1: "1085", 
     // y1: "245", 
     // x2: "1085", 
