@@ -12,6 +12,7 @@ import { SvgFemaleWrapper } from './components/SvgFemaleWrapper';
 export type Slug =
   | 'abs'
   | 'adductors'
+  | 'adductors2'
   | 'ankles'
   | 'biceps'
   | 'calves'
@@ -41,7 +42,7 @@ export type Slug =
   | 'wrist'
   | 'angle'
   | 'axial'
-  |'ankles_joint'
+  | 'ankles_joint'
 
 export interface BodyPart {
   intensity?: number;
@@ -57,7 +58,7 @@ export interface BodyPart {
   y2?: string;
   width?: string;
   height?: string;
-  optionId?:string;
+  optionId?: string;
 }
 
 type Props = {
@@ -124,7 +125,7 @@ const Body = ({
               return (
                 <Path
                   key={path}
-                  onPress={() => { onBodyPartPress?.(bodyPart)  }}
+                  onPress={() => { onBodyPartPress?.(bodyPart) }}
                   id={bodyPart.slug}
                   fill={getColorToFill(bodyPart)}
                   d={path}
@@ -133,7 +134,6 @@ const Body = ({
             });
 
           } else if (showJoints && bodyPart.type == 'circle') {
-            console.log(bodyPart, 'bp')
             return (
               <Circle
                 fill={getColorToFill(bodyPart)}
